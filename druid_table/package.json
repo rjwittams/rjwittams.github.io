@@ -1,0 +1,15 @@
+{
+  "name": "druid_table_web",
+  "collaborators": [
+    "Robert Wittams <robert@wittams.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "druid_table_web_bg.wasm",
+    "druid_table_web.js",
+    "druid_table_web.d.ts"
+  ],
+  "module": "druid_table_web.js",
+  "types": "druid_table_web.d.ts",
+  "sideEffects": false
+}
