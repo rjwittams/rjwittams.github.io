@@ -48,8 +48,8 @@ From the widget authors point of view, there are a couple of decisions to be mad
 Currently, the general thought process is : 
 - What is my widget "about"? That should be its data. The framework will handle reactivity of this, 
   by calling update whenever it changes, be that up or down the hierarchy. For example: A text box is about text. So a string (Rope?) is its data. 
-- What other choices do constructors of my widget have to make? The data that embodies those choices will be stored in self, 
-  and will come in via constructor arguments or build methods, and will often default to something from Env. 
+- What other choices are available to consumers of my widget? The data that embodies those choices will be stored in self, 
+  will come in via constructor arguments or build (with_* ) methods, and will often default to something from Env. 
   This will not be reactive, either up or down the heirarchy. For example: the text color of a label. 
   It may be possible for my owner to access this information. 
 - What other state do I have to maintain? That will go in self. For example: the scroll positions of a Scroll. 
