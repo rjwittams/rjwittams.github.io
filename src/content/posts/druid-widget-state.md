@@ -1,4 +1,8 @@
-# State in Druid widgets
+---
+title: State in Druid widgets
+date: 2020-09-12
+description: Where widget state lives in Druid, when to call request_*, and three partial answers to the single-binding problem.
+---
 
 ## Overview
 First a quick overview - this is not meant to cover the entirety of Druid, just the relevant points
@@ -38,7 +42,7 @@ When should you call the various request_* methods? (Just covering the ones that
 | request_paint_rect | (Advanced) When some state that you depend on in paint changes, and you can pinpoint the relevant rect. Useful for containers|
 
 
-## Observations 
+## Observations
 
 From the widget authors point of view, there are a couple of decisions to be made related to state: 
 
@@ -67,9 +71,9 @@ So the widget author has to make decisions that limit the choices we would like 
    - What parts of this widget are reactive?
    - Where does the state backing this property live (ie which other widgets should be able to share it and when should it be dropped)? 
 
-# Possible partial solutions: 
+## Possible partial solutions
 
-## View switcher
+### View switcher
 **What is it?**  A wrapper widget will recreate the widget from data and env each time the relevant parts change
 
 **What do you get?**  Constructor args etc can be made reactive 
@@ -78,14 +82,14 @@ So the widget author has to make decisions that limit the choices we would like 
   Identity will be lost if not manually maintained. A bit more manual dependency tracking is required.
 
 
-## Scope        
+### Scope        
 **What is it?**  Your widget can put more state into data, without polluting app data. A wrapper widget will maintain a two way link.
 
 **What do you get?**  Identity and private state maintained. Multiple sibling widgets can reactively share encapsulated state.
 
 **Limitations** Your 'real' widget(s) will likely need to be wrapped by a scope and another wrapper to set up the scope. 
 
-## Bindings 
+### Bindings 
 **What is it?** A wrapper widget (BindingHost) that gives you one or two way transfer of information between data and self. Env should be doable. 
                   (This can include everything inside a scope, because a scopes state is kept in the self of the Scope widget.)
                   The wrapper reach past lenses and other type preserving wrappers to access the widgets self. 
@@ -98,7 +102,7 @@ So the widget author has to make decisions that limit the choices we would like 
                   Implementation will likely change. Can only reach past wrappers that do not box, and currently needs impls of traits for wrappers and widgets that need to be bound. 
 
 
-# Speculation
+## Speculation
 
 I think the combination of Scope + Bindings does give us at least a 'full reactive' story : 
  

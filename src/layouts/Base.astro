@@ -1,0 +1,53 @@
+---
+// Page shell: name-left header, one column, mono colophon.
+import '../styles/site.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  active?: 'home';
+}
+const { title, description, active } = Astro.props;
+const fullTitle = title ? `${title} · Robert Wittams` : 'Robert Wittams';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>{fullTitle}</title>
+{description && <meta name="description" content={description} />}
+<link rel="canonical" href={canonical} />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="alternate" type="application/rss+xml" title="Robert Wittams" href="/rss.xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<header class="col top">
+  <p class="top-name"><a href="/">Robert Wittams</a></p>
+  <nav class="top-nav" aria-label="Primary">
+    <ul>
+      <li><a href="/" aria-current={active === 'home' ? 'page' : undefined}>Writing</a></li>
+      <li><a href="/raddebugger/">RAD Debugger port</a></li>
+      <li><a href="https://github.com/rjwittams">GitHub</a></li>
+      <li><a href="/rss.xml">Feed</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="col">
+  <slot />
+</main>
+
+<footer class="col colophon">
+  <p>© Robert Wittams. Source for this site:
+  <a href="https://github.com/rjwittams/rjwittams.github.io">github.com/rjwittams/rjwittams.github.io</a>.</p>
+</footer>
+
+</body>
+</html>

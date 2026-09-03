@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const posts = (await getCollection('posts', (p) => !p.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base active="home" description="Robert Wittams: notes on debuggers, low-level development, and long-lived personal forks.">
+
+<p class="intro">Notes on debuggers, low-level development, and maintaining
+long-lived personal forks.</p>
+
+<h2 class="section-head">Writing</h2>
+<ul class="posts">
+  {posts.map((p) => (
+    <li>
+      <time datetime={p.data.date.toISOString().slice(0, 10)}>{fmt(p.data.date)}</time>
+      <div>
+        <a href={`/posts/${p.id}/`}>{p.data.title}</a>
+        {p.data.description && <p>{p.data.description}</p>}
+      </div>
+    </li>
+  ))}
+</ul>
+
+<h2 class="section-head">Projects</h2>
+<ul class="links">
+  <li><a href="/raddebugger/">The RAD Debugger on macOS</a> <span>· a port of Epic's debugger to Apple silicon and Intel Macs</span></li>
+  <li><a href="https://github.com/flotilla-org/porthole">porthole</a> <span>· screenshot and drive GUI apps from the command line</span></li>
+  <li><a href="https://github.com/flotilla-org/cleat">cleat</a> <span>· recorded terminal sessions with remote access to GUI privileges</span></li>
+  <li><a href="/druid_table/">Druid table demo</a> <span>· a table widget for Druid, compiled to WebAssembly (2020)</span></li>
+</ul>
+
+</Base>
