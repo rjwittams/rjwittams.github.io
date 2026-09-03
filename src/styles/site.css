@@ -165,6 +165,38 @@ pre {
 }
 pre code { font-size: inherit; }
 
+.post figure { margin: var(--space-xl) 0; }
+.post figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: var(--rule-hair) solid var(--color-rule);
+}
+.post figure a { display: block; line-height: 0; }
+
+.post details {
+  margin: var(--space-lg) 0;
+  border-top: var(--rule-hair) solid var(--color-rule);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+.post summary {
+  cursor: pointer;
+  padding: var(--space-xs) 0;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.06em;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+.post summary:hover { color: var(--color-accent); }
+.post details[open] > summary { margin-bottom: var(--space-xs); }
+.post details > :last-child { margin-bottom: var(--space-sm); }
+.post figcaption {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  margin-top: var(--space-xs);
+  line-height: 1.5;
+}
+
 .post .table-scroll { overflow-x: auto; margin: 0 0 var(--space-md); }
 .post table {
   width: 100%;
