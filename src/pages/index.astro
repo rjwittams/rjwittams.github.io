@@ -7,10 +7,9 @@ const posts = (await getCollection('posts', (p) => !p.data.draft))
 const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
-<Base active="home" description="Robert Wittams: notes on debuggers, low-level development, and long-lived personal forks.">
+<Base active="home" description="Robert Wittams: notes on development">
 
-<p class="intro">Notes on debuggers, low-level development, and maintaining
-long-lived personal forks.</p>
+<p class="intro">Notes on development.</p>
 
 <h2 class="section-head">Writing</h2>
 <ul class="posts">
