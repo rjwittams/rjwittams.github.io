@@ -1,0 +1,51 @@
+---
+import Base from '../../../layouts/Base.astro';
+const download = '/raddbg/testing/2026-09-27-bfbefb3c/RAD-Debugger-0.9.29-macOS-arm64-bfbefb3c.dmg';
+---
+
+<Base title="RJW RAD Debugger: Apple Silicon alpha test">
+<article>
+  <h1>RJW RAD Debugger: Apple Silicon alpha test</h1>
+  <p>27 September 2026 · build <code>bfbefb3c</code></p>
+  <p>This is a test build of the macOS fork, not a replacement for the published
+  alpha. Keep your previous app and back up your RAD configuration before trying it.</p>
+  <p><a href={download}>Download the Apple Silicon DMG</a> (2.9 MB).</p>
+  <p>Apple Silicon only, built for macOS 14 or later. The packaged executable
+  passed nine debugging checks on macOS 26.5.1; older macOS versions haven't
+  been checked for this build. The DMG is Developer ID signed, notarized and stapled.</p>
+
+  <h2>Trying it</h2>
+  <p>Quit the previous debugger, open the DMG and copy the app out before running
+  it. Keep the old app under a different name if you'd like to switch back.
+  macOS can still ask for debugger authorization when you launch a target.</p>
+  <p>Command and Control are now separate. Saved Alpha 1 bindings aren't migrated:
+  run <strong>Reset To Default Bindings</strong> for the new Mac defaults, or edit
+  individual bindings. Resetting replaces custom bindings too.</p>
+  <p>Old converted debug-info files can hide converter fixes. With RAD closed,
+  move aside the generated <code>.rdi</code> file for the target you're testing.
+  For <code>foo.dSYM</code>, this is normally the adjacent <code>foo.rdi</code>.
+  If that directory wasn't writable, check <code>~/Library/Caches/raddbg/rdis</code>
+  for the matching generated cache. Keep a backup; don't remove the executable,
+  its dSYM, your configuration, or an RDI file supplied as an original input.</p>
+
+  <h2>What to check</h2>
+  <p>Please try an assert made with <code>__builtin_trap()</code>: does it stop on
+  the right line, show the caller stack and let you continue? Also try ordinary
+  stepping and inspecting locals in your own program.</p>
+  <p>There are changes to trackpad scrolling, shortcut text input, title-bar
+  dragging and zooming, and text positioning. These need normal desktop use as
+  well as automated tests. The earlier window-drag crash is still unproven,
+  and this build doesn't claim to fix every repeated-step symptom.</p>
+  <p>If it crashes, please keep the macOS crash report and mention
+  <code>bfbefb3c</code>. Matching dSYM files are retained for diagnosis.</p>
+
+  <h2>Build details</h2>
+  <p><a href="https://github.com/rjwittams/raddebugger/commit/bfbefb3cc9f458b9accd46d00e80daaf96572628">Source commit</a> ·
+  <a href="https://github.com/rjwittams/raddebugger/blob/bfbefb3cc9f458b9accd46d00e80daaf96572628/LICENSE">License</a></p>
+  <p>Automated checks passed for basic C debugging, assert and optimized assert,
+  frame-explicit evaluation, inline frames, compact/DWARF/frame-record unwinding,
+  and caller-register availability. This isn't a full language or platform matrix.</p>
+  <p>DMG SHA-256:</p>
+  <pre><code>abdced27422b689e54af0ffd98efde49a3540a878cb9335116d39488a249d589</code></pre>
+</article>
+</Base>
